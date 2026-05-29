@@ -1,21 +1,24 @@
 package taller3;
 
-public class HechizoTierra extends Hechizo implements Calcular{
-	private int presionDelAgua;
+public class HechizoTierra extends Hechizo {
+	private int mejoraDefensa;
 
-	public HechizoTierra(String nombreHechizo, String tipo, int daño, int presionDelAgua) {
-		super(nombreHechizo, tipo, daño);
-		this.presionDelAgua = presionDelAgua;
+	public HechizoTierra(String nombreHechizo, int daño, int mejoraDefensa) {
+		super(nombreHechizo, "Tierra" , daño);
+		this.mejoraDefensa = mejoraDefensa;
 	}
 
-	public int getPresionDelAgua() {
-		return presionDelAgua;
+
+	public int getMejoraDefensa() {
+		return mejoraDefensa;
 	}
+
+
 
 	@Override
-	public void calcularPuntuacionHechizos() {
+	public double calcularPuntuacion() {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 	
 	

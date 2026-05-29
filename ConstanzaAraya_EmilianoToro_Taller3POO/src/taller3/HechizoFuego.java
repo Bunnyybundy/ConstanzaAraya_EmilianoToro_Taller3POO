@@ -1,21 +1,35 @@
 package taller3;
+/**
+ * Representa un hechizo de tipo Fuego.
+ * La puntuación se calcula como Daño * DuraciónQuemadura.
+ */
+public class HechizoFuego extends Hechizo {
+	private int duracionQuemadura;
 
-public class HechizoFuego extends Hechizo implements Calcular{
-	private int mejoraDefensa;
+	 /**
+     * Constructor de HechizoFuego.
+     * @param nombre Nombre del hechizo.
+     * @param daño Daño base del hechizo.
+     * @param duracionQuemadura Duración del efecto de quemadura.
+     */
+	public HechizoFuego(String nombreHechizo, int daño, int duracionQuemadura) {
+		super(nombreHechizo,"Fuego", daño);
+		this.duracionQuemadura = duracionQuemadura;
+	}
+    /** @return duracion de la quemadura. */
 
-	public HechizoFuego(String nombreHechizo, String tipo, int daño, int mejoraDefensa) {
-		super(nombreHechizo, tipo, daño);
-		this.mejoraDefensa = mejoraDefensa;
+	public int getDuracionQuemadura() {
+		return duracionQuemadura;
 	}
 
-	public int getMejoraDefensa() {
-		return mejoraDefensa;
-	}
-
+	/**
+     * Calcula la puntuación del hechizo de fuego.
+     * @return Daño multiplicado por la duración de la quemadura.
+     */
 	@Override
-	public void calcularPuntuacionHechizos() {
-		// TODO Auto-generated method stub
-		
+	public double calcularPuntuacion() {
+
+		return getDaño() * duracionQuemadura ;
 	}
 	
 	
