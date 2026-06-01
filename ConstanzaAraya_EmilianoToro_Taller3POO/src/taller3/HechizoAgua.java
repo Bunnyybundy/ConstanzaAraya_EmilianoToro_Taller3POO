@@ -24,13 +24,8 @@ public class HechizoAgua extends Hechizo {
 
 	@Override
 	public double calcularPuntuacion() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return (getDaño() + cantidadHeal + presionAgua) * 2;
 	}
 
-	
-	
-	
-	
-	
 }

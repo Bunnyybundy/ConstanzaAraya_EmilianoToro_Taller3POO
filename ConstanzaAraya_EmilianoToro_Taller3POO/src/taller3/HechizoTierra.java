@@ -17,9 +17,8 @@ public class HechizoTierra extends Hechizo {
 
 	@Override
 	public double calcularPuntuacion() {
-		// TODO Auto-generated method stub
-		return 0;
+
+		return (getDaño() * mejoraDefensa) / 2.0;
+
 	}
-	
-	
 }
