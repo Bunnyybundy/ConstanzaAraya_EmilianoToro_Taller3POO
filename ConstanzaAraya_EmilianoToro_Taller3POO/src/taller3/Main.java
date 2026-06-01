@@ -8,7 +8,8 @@ import java.util.Scanner;
 public class Main {
 	static ArrayList<Hechizo> hechizos = new ArrayList<>();
 	public static void main(String[] args) {
-		leerMagos("Magos.txt", null);
+		GestorMagos gestor = new GestorMagos();
+		leerMagos("Magos.txt", gestor);
 		leerHechizos("Hechizos.txt");
 	}
 
@@ -38,6 +39,7 @@ public class Main {
 					int cantidadHeal = Integer.parseInt(extras[0]);
 					int presionAgua = Integer.parseInt(extras[1]);
 					hechizos.add(new HechizoAgua(nombre, daño, cantidadHeal, presionAgua));
+					break;
 				case "Tierra":
 					int mejoraDefensa = Integer.parseInt(partes[3]);
 					hechizos.add(new HechizoTierra(nombre, daño, mejoraDefensa));
