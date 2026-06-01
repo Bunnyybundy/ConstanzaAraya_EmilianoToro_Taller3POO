@@ -9,8 +9,8 @@ public class Main {
 	static ArrayList<Hechizo> hechizos = new ArrayList<>();
 	public static void main(String[] args) {
 		GestorMagos gestor = new GestorMagos();
-		leerMagos("Magos.txt", gestor);
 		leerHechizos("Hechizos.txt");
+		leerMagos("Magos.txt", gestor);
 	}
 
 	private static void leerHechizos(String archivo) {
@@ -61,20 +61,24 @@ public class Main {
 				String[] partes = linea.split(";");
 				String nombreMago = partes[0];
 				Mago mago = new Mago(nombreMago);
-				
+
 				if(partes.length > 1) {
-					String[] hechizos = partes[1].split("\\|");
-					for(String h : hechizos) {
-						System.out.println("Hechizo leido: " + h);
+					String[] nombresHechizos = partes[1].split("\\|");
+					for(String nombreH : nombresHechizos) {
+						for(Hechizo h : hechizos) {
+							if(h.getNombreHechizo().equals(nombreH)) {
+								mago.agregarHechizo(h);
+								break;
+							}
+						}
 					}
 				}
 				gestor.agregarMago(mago);
 			}
 			sc.close();
+			
 		}catch(FileNotFoundException e) {
 			System.out.println("Error al leer el archivo de magos: " + e.getMessage());
 		}
-	
 	}
-
 }
