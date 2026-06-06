@@ -23,7 +23,12 @@ public class HechizoPlanta extends Hechizo {
 	public int getCantPlantas() {
 		return cantPlantas;
 	}
+    /** @return Duracion de stun. */
 
+
+	public int getDuracionStun() {
+		return duracionStun;
+	}
 	/**
      * Calcula la puntuación del hechizo de planta.
      * @return Daño más el producto de duración del stun y cantidad de plantas.
