@@ -2,20 +2,42 @@ package taller3;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-	static ArrayList<Hechizo> hechizos = new ArrayList<>();
 	public static void main(String[] args) {
-		GestorMagos gestor = new GestorMagos();
+		GestorMagos gestorMagos = new GestorMagos();
 		gestorHechizos gestorH = new gestorHechizos();
-		leerHechizos("Hechizos.txt",gestorH);
-		leerMagos("Magos.txt", gestor);
-		MenuAdmin menuAdmin = new MenuAdmin(gestor, gestorH);
-		menuAdmin.mostrarMenu();
+		leerHechizos("Hechizos.txt", gestorH);
+		leerMagos("Magos.txt", gestorMagos, gestorH);
 
+		Scanner sc = new Scanner(System.in);
+		int opcion;
+		do {
+			System.out.println("\n === Menu Principal === ");
+			System.out.println("1. Panel Administrador");
+			System.out.println("2. Panel Analista");
+			System.out.println("0. Salir");
+			opcion = sc.nextInt();
+			sc.nextLine();
 
+			switch(opcion) {
+			case 1:
+				MenuAdmin menuAdmin = new MenuAdmin(gestorMagos, gestorH);
+				menuAdmin.mostrarMenu();
+				break;
+			case 2:
+				MenuAnalista menuAnalista = new MenuAnalista(gestorMagos, gestorH);
+				menuAnalista.mostrarMenu();
+				break;
+			case 0:
+				System.out.println("Saliendo del sistema...");
+				break;
+			default:
+				System.out.println("Opcion incorrecta. Intenta nuevamente.");
+			}
+		} while(opcion != 0);
+		sc.close();
 	}
 
 	private static void leerHechizos(String archivo, gestorHechizos gestorHechizos) {
@@ -61,7 +83,7 @@ public class Main {
 		}
 	}
 
-	private static void leerMagos(String archivo, GestorMagos gestor) {
+	private static void leerMagos(String archivo, GestorMagos gestor, gestorHechizos gestorH) {
 		try {
 			Scanner sc = new Scanner(new File(archivo));
 			while(sc.hasNextLine()) {
@@ -73,11 +95,9 @@ public class Main {
 				if(partes.length > 1) {
 					String[] nombresHechizos = partes[1].split("\\|");
 					for(String nombreH : nombresHechizos) {
-						for(Hechizo h : hechizos) {
-							if(h.getNombreHechizo().equals(nombreH)) {
-								mago.agregarHechizo(h);
-								break;
-							}
+						Hechizo h = gestorH.buscarPorNombre(nombreH);
+						if(h != null) {
+							mago.agregarHechizo(h);
 						}
 					}
 				}
