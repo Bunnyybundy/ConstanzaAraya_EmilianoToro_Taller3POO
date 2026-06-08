@@ -1,4 +1,4 @@
-# 🌟 Taller 3 - Proyecto Integrador de Programación Avanzada (POO 2026-I)
+# 🌟 Taller 3 - Proyecto Integrador de Programación Avanzada 
 
 ## 📌 Descripción del Proyecto
 Este proyecto corresponde al **Taller 3** del curso de Programación Orientada a Objetos (POO 2026-I).  
