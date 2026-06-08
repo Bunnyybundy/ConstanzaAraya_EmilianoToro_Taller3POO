@@ -50,13 +50,32 @@ public class MenuAdmin {
 			case 1:
 				System.out.println(" Nombre del nuevo mago: ");
 				String nombre = s.nextLine();
-				gestor.agregarMago(new Mago(nombre));
+				Mago nuevoMago = new Mago(nombre);
+				System.out.println("Desea agregar hechizos al mago? (si/no): ");
+				String respuesta = s.nextLine();
+				if(respuesta.equalsIgnoreCase("si")) {
+					System.out.println("Ingrese el nombre del hechizo (o 'fin' para terminar): ");
+					String nombreHechizo = s.nextLine();
+					while(!nombreHechizo.equalsIgnoreCase("fin")) {
+						Hechizo h = gestorHechizos.buscarPorNombre(nombreHechizo);
+						if(h != null) {
+							nuevoMago.agregarHechizo(h);
+							System.out.println("Hechizo agregado correctamente.");
+						} else {
+							System.out.println("Hechizo no encontrado.");
+						}
+						System.out.println("Ingrese otro hechizo (o 'fin' para terminar): ");
+						nombreHechizo = s.nextLine();
+						
+					}
+				}
+				gestor.agregarMago(nuevoMago);
 				guardarMagos();
 				break;
 			case 2:
 				System.out.println("Nombre del mago a modificar");
 				String viejo = s.nextLine();
-				System.out.println("Nuevo nombre: ");
+				System.out.println("Nombre al cual quiere remplazar: ");
 				String nuevo = s.nextLine();
 				gestor.modificarMago(viejo, new Mago(nuevo));
 				guardarMagos();
