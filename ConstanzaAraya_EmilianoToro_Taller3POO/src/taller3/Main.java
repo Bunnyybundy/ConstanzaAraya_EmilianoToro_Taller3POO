@@ -27,6 +27,7 @@ public class Main {
 			System.out.println("1. Panel Administrador");
 			System.out.println("2. Panel Analista");
 			System.out.println("0. Salir");
+			System.out.println("Ingrese la opcion: ");
             // Validación de entrada
 			try{
 				opcion = sc.nextInt();

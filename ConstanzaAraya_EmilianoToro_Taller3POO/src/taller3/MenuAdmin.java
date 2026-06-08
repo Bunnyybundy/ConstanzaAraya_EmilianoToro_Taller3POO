@@ -37,6 +37,7 @@ public class MenuAdmin {
 			System.out.println("5. Modificar Hechizo");
 			System.out.println("6. Eliminar Hechizo");
 			System.out.println("0. Salir");
+			System.out.println("Ingrese la opcion: ");
 			try{
 				opcion = s.nextInt();
 			}catch(NumberFormatException e) {

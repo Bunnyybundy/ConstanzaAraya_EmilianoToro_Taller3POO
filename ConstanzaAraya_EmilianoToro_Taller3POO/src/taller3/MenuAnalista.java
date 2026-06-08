@@ -32,6 +32,7 @@ public class MenuAnalista {
 			System.out.println("5. Mostrar todos los hechizos junto con su puntuación");
 			System.out.println("6. Mostrar todos los magos junto con su puntuacion");
 			System.out.println("0. Salir");
+			System.out.println("Ingrese la opcion: ");
 			try{
 				opcion = s.nextInt();
 			}catch(NumberFormatException e) {
