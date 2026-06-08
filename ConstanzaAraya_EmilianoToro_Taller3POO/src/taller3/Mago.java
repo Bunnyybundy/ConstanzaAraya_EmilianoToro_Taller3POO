@@ -7,7 +7,7 @@ import java.util.List;
  * Cada mago posee un conjunto de hechizos y una puntuación total
  * que se calcula sumando las puntuaciones de sus hechizos.
  */
-public class Mago {
+public class Mago implements Calcular{
 	private String nombreMago;
 	private List<Hechizo> hechizos;
 	/**
@@ -43,5 +43,11 @@ public class Mago {
 			total += h.calcularPuntuacion();
 		}
 		return total;
+	}
+	@Override
+	public void calcularPuntuacionHechizos() {
+		System.out.println("Puntuacion total: " + calcularPuntuacionTotal());
+		
+		
 	}
 }

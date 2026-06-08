@@ -2,17 +2,30 @@ package taller3;
 
 import java.io.*;
 import java.util.*;
-
+/**
+ * Panel Administrador.
+ * Permite realizar operaciones CRUD sobre magos y hechizos.
+ * Los cambios se reflejan en los archivos Magos.txt y Hechizos.txt.
+ */
 public class MenuAdmin {
 	static Scanner s = new Scanner(System.in);
 	private GestorMagos gestor;
-	private gestorHechizos gestorHechizos;
+	private GestorHechizos gestorHechizos;
 
-	public MenuAdmin(GestorMagos gestor, gestorHechizos gestorHechizos) {
+	/**
+     * Constructor del menú administrador.
+     * @param gestor Gestor de magos.
+     * @param gestorHechizos Gestor de hechizos.
+     */
+	public MenuAdmin(GestorMagos gestor, GestorHechizos gestorHechizos) {
 		this.gestor = gestor;
 		this.gestorHechizos = gestorHechizos;
 	}
 
+	/**
+     * Muestra el menú de opciones del administrador.
+     * Permite agregar, modificar y eliminar magos y hechizos.
+     */
 	public void mostrarMenu() {
 		int opcion;
 		do {
@@ -24,7 +37,12 @@ public class MenuAdmin {
 			System.out.println("5. Modificar Hechizo");
 			System.out.println("6. Eliminar Hechizo");
 			System.out.println("0. Salir");
-			opcion = s.nextInt();
+			try{
+				opcion = s.nextInt();
+			}catch(NumberFormatException e) {
+				System.out.println("Entrada invalida, intenta de nuevo.");
+				opcion = -1;
+			}
 			s.nextLine();
 
 			switch(opcion) {
@@ -89,6 +107,13 @@ public class MenuAdmin {
 		} while(opcion != 0);
 	}
 
+	/**
+     * Crea un nuevo hechizo según el tipo indicado.
+     * @param nombre Nombre del hechizo.
+     * @param tipo Tipo de hechizo (Fuego, Agua, Planta, Tierra).
+     * @param daño Daño base del hechizo.
+     * @return Hechizo creado o null si el tipo es inválido.
+     */
 	private Hechizo crearHechizo(String nombre, String tipo, int daño) {
 		switch(tipo) {
 		case "Fuego":
@@ -114,7 +139,10 @@ public class MenuAdmin {
 			return null;
 		}
 	}
-
+	/**
+     * Guarda la lista de magos en el archivo Magos.txt.
+     * Mantiene el formato original: Nombre;Hechizo1|Hechizo2|...
+     */
 	private void guardarMagos() {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter("Magos.txt"));
@@ -137,7 +165,14 @@ public class MenuAdmin {
 			System.out.println("Error al guardar magos: " + e.getMessage());
 		}
 	}
-
+	 /**
+     * Guarda la lista de hechizos en el archivo Hechizos.txt.
+     * Mantiene el formato original según el tipo de hechizo:
+     * - Fuego: Nombre;Fuego;Daño;DuracionQuemadura
+     * - Tierra: Nombre;Tierra;Daño;MejoraDefensa
+     * - Planta: Nombre;Planta;Daño;DuracionStun,CantPlantas
+     * - Agua: Nombre;Agua;Daño;CantidadHeal,PresionAgua
+     */
 	private void guardarHechizos() {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter("Hechizos.txt"));

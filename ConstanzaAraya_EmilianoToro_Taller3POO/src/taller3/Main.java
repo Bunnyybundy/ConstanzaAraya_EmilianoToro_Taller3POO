@@ -1,13 +1,22 @@
 package taller3;
-
+/**
+ * Constanza Fernanda Araya Plaza; 21.609.057-8; ICCI
+ * Emiliano Angel Toro Rojas; 21.512.702-8; ITI
+ * */
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-
+/**
+ * Clase principal del sistema.
+ * Punto de entrada del programa que inicializa los gestores de magos y hechizos,
+ * carga los datos desde los archivos Magos.txt y Hechizos.txt,
+ * y permite al usuario seleccionar entre el Panel Administrador y el Panel Analista.
+ */
 public class Main {
 	public static void main(String[] args) {
 		GestorMagos gestorMagos = new GestorMagos();
-		gestorHechizos gestorH = new gestorHechizos();
+		GestorHechizos gestorH = new GestorHechizos();
+        // Carga inicial de hechizos y magos desde archivos
 		leerHechizos("Hechizos.txt", gestorH);
 		leerMagos("Magos.txt", gestorMagos, gestorH);
 
@@ -18,7 +27,13 @@ public class Main {
 			System.out.println("1. Panel Administrador");
 			System.out.println("2. Panel Analista");
 			System.out.println("0. Salir");
-			opcion = sc.nextInt();
+            // Validación de entrada
+			try{
+				opcion = sc.nextInt();
+			}catch(NumberFormatException e) {
+				System.out.println("Entrada invalida, intenta de nuevo.");
+				opcion = -1;
+			}
 			sc.nextLine();
 
 			switch(opcion) {
@@ -39,8 +54,12 @@ public class Main {
 		} while(opcion != 0);
 		sc.close();
 	}
-
-	private static void leerHechizos(String archivo, gestorHechizos gestorHechizos) {
+	/**
+     * Lee los hechizos desde el archivo especificado y los carga en el gestor.
+     * @param archivo Nombre del archivo de hechizos.
+     * @param gestorHechizos Gestor donde se almacenarán los hechizos.
+     */
+	private static void leerHechizos(String archivo, GestorHechizos gestorHechizos) {
 		try {
 			Scanner sc = new Scanner(new File(archivo));
 			while(sc.hasNextLine()) {
@@ -82,8 +101,13 @@ public class Main {
 			System.out.println("Error al leer el archivo de hechizos: " + e.getMessage());
 		}
 	}
-
-	private static void leerMagos(String archivo, GestorMagos gestor, gestorHechizos gestorH) {
+	/**
+     * Lee los magos desde el archivo especificado y los carga en el gestor.
+     * @param archivo Nombre del archivo de magos.
+     * @param gestor Gestor donde se almacenarán los magos.
+     * @param gestorH Gestor de hechizos para asociar hechizos existentes a los magos.
+     */
+	private static void leerMagos(String archivo, GestorMagos gestor, GestorHechizos gestorH) {
 		try {
 			Scanner sc = new Scanner(new File(archivo));
 			while(sc.hasNextLine()) {

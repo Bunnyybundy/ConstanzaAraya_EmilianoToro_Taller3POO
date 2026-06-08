@@ -2,18 +2,25 @@ package taller3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ * Panel Analista.
+ * Permite generar reportes y rankings de magos y hechizos.
+ */
 public class MenuAnalista {
 	private GestorMagos gestor;
-	private gestorHechizos gestorHechizos;
+	private GestorHechizos gestorHechizos;
 	static Scanner s = new Scanner(System.in);
 	
-	public MenuAnalista(GestorMagos gestor, taller3.gestorHechizos gestorHechizos) {
-		super();
+	/**
+     * Constructor del menú analista.
+     * @param gestor Gestor de magos.
+     * @param gestorHechizos Gestor de hechizos.
+     */
+	public MenuAnalista(GestorMagos gestor, GestorHechizos gestorHechizos) {
 		this.gestor = gestor;
 		this.gestorHechizos = gestorHechizos;
 	}
-	
+    /** Muestra el menú de opciones del analista. */
 	public void mostrarMenu() {
 		int opcion;
 		do {
@@ -25,8 +32,13 @@ public class MenuAnalista {
 			System.out.println("5. Mostrar todos los hechizos junto con su puntuación");
 			System.out.println("6. Mostrar todos los magos junto con su puntuacion");
 			System.out.println("0. Salir");
-			opcion = s.nextInt();
-			
+			try{
+				opcion = s.nextInt();
+			}catch(NumberFormatException e) {
+				System.out.println("Entrada invalida, intenta de nuevo.");
+				opcion = -1;
+			}
+			s.nextLine();
 			switch(opcion) {
 			case 1:
 				topHechizos();
@@ -56,19 +68,19 @@ public class MenuAnalista {
 			
 		}while(opcion != 0);
 	}
-
+    /** Muestra todos los magos con su puntuación. */
 	private void mostrarMagosConPuntuacion() {
 		for(Mago m: gestor.getMagos()) {
 			System.out.println("Mago: " + m.getNombreMago() + " | Puntuacion: " + m.calcularPuntuacionTotal());
 		}
 	}
-
+    /** Muestra todos los hechizos con su puntuación. */
 	private void mostrarHechizosConPuntuacion() {
 		for(Hechizo h: gestorHechizos.getHechizos()) {
 			System.out.println("Hechizo: " + h.getNombreHechizo() + " | Tipo: " + h.getTipo() + " | Puntuacion: " + h.calcularPuntuacion());
 		}
 	}
-
+    /** Muestra el Top 3 de magos según puntuación. */
 	private void topMagos() {
 		ArrayList<Mago> magos = new ArrayList<>(gestor.getMagos());
 		for(int i = 0; i< magos.size() - 1; i++ ) {
@@ -89,7 +101,7 @@ public class MenuAnalista {
             System.out.println((i+1) + ". " + m.getNombreMago() + " | Puntuación: " + m.calcularPuntuacionTotal());
         }
 	}
-	
+    /** Muestra el Top 10 de hechizos según puntuación. */
 	private void topHechizos() {
 		ArrayList<Hechizo> hechizos = new ArrayList<>(gestorHechizos.getHechizos());
 		for(int i = 0; i< hechizos.size()- 1; i++) {
